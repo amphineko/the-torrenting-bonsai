@@ -1,0 +1,13 @@
+[Unit]
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+TimeoutStartSec=0
+WorkingDirectory=/home/amphineko/bonsai
+ExecStartPre=-/usr/bin/podman-compose down
+ExecStart=/usr/bin/podman-compose up --force-recreate --remove-orphans
+ExecStop=/usr/bin/podman-compose down
+
+[Install]
+WantedBy=multi-user.target
